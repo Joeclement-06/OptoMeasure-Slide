@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+  <title>OptoMeasure · VR</title>
+  <link rel="stylesheet" href="vr.css">
+</head>
+<body>
+
+  <!-- CONNECTION OVERLAY -->
+  <div class="connect-overlay" id="connectOverlay">
+    <div class="ov-bg">
+      <div class="ov-ring r1"></div>
+      <div class="ov-ring r2"></div>
+      <div class="ov-ring r3"></div>
+      <div class="ov-grid"></div>
+    </div>
+
+    <div class="ov-card">
+      <div class="ov-icon-wrap">
+        <div class="ov-orbit o1"></div>
+        <div class="ov-orbit o2"></div>
+        <div class="ov-icon">🥽</div>
+      </div>
+
+      <h1 class="ov-title">VR Patient View</h1>
+      <div class="ov-badge">+8.0 D · image ~36 cm</div>
+      <p class="ov-hint">Share this code with the Controller phone</p>
+
+      <div class="code-row">
+        <div class="room-code" id="roomCode">------</div>
+        <button class="copy-btn" id="btnCopy"><span class="copy-icon">📋</span></button>
+      </div>
+
+      <div class="status-row" id="connectStatus">
+        <div class="status-dot waiting" id="statusDot"></div>
+        <span id="statusText">Waiting for controller…</span>
+      </div>
+
+      <div class="signal-bars">
+        <div class="sb sb1"></div>
+        <div class="sb sb2"></div>
+        <div class="sb sb3"></div>
+        <div class="sb sb4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VR SPLIT SCREEN -->
+  <div class="vr-container" id="vrContainer">
+
+    <!-- LEFT EYE — horizontal line -->
+    <div class="eye-view" id="leftEye">
+      <div class="eye-content" id="leftContent">
+        <div class="h-line h-line-left"  id="hLineLeft"></div>
+        <div class="center-dot"          id="dotLeft"></div>
+        <div class="h-line h-line-right" id="hLineRight"></div>
+      </div>
+    </div>
+
+    <div class="vr-divider"></div>
+
+    <!-- RIGHT EYE — vertical line -->
+    <div class="eye-view" id="rightEye">
+      <div class="eye-content" id="rightContent">
+        <div class="v-line v-line-top"    id="vLineTop"></div>
+        <div class="center-dot"           id="dotRight"></div>
+        <div class="v-line v-line-bottom" id="vLineBottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection indicator -->
+  <div class="conn-indicator" id="connIndicator"></div>
+
+  <!-- Debug overlay -->
+  <pre class="debug-overlay" id="debugOverlay" style="display:none"></pre>
+
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="shared.js"></script>
+  <script src="vr.js"></script>
+</body>
+</html>

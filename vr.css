@@ -1,0 +1,217 @@
+/* OptoMeasure v4 — vr.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --ink:       #050d12;
+  --panel:     #0c2030;
+  --teal:      #00dcb4;
+  --teal-d:    #009e84;
+  --teal-g:    rgba(0,220,180,.30);
+  --amber:     #ffb347;
+  --amber-d:   #c47f20;
+  --green:     #22e594;
+  --green-g:   rgba(34,229,148,.35);
+  --red:       #ff5b5b;
+  --text2:     #608e83;
+  --mono:      'Space Mono', monospace;
+  --display:   'Syne', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden; background: #fff;
+  user-select: none; -webkit-user-select: none; touch-action: none;
+}
+
+/* ── OVERLAY ─────────────────────────────────────────────────────────────── */
+.connect-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .55s, visibility .55s;
+  overflow: hidden;
+}
+.connect-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.ov-bg { position: absolute; inset: 0; }
+
+.ov-ring {
+  position: absolute; top: 50%; left: 50%; border-radius: 50%;
+  border: 1px solid rgba(0,220,180,.07);
+  animation: ringBreath 5s ease-in-out infinite;
+}
+.r1 { width: 680px; height: 680px; transform: translate(-50%,-50%); }
+.r2 { width: 480px; height: 480px; transform: translate(-50%,-50%); animation-delay:-1.8s; border-color:rgba(0,220,180,.05); }
+.r3 { width: 300px; height: 300px; transform: translate(-50%,-50%); animation-delay:-3.2s; border-color:rgba(255,179,71,.05); }
+@keyframes ringBreath { 0%,100%{opacity:.4} 50%{opacity:1} }
+
+.ov-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,220,180,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,220,180,.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gd 22s linear infinite;
+}
+@keyframes gd { 100% { background-position: 40px 40px; } }
+
+.ov-card {
+  position: relative; z-index: 2; text-align: center;
+  max-width: 360px; width: 90%;
+  background: var(--panel);
+  border: 1px solid rgba(0,220,180,.22);
+  border-radius: 24px; padding: 36px 28px 28px;
+  box-shadow: 0 0 60px rgba(0,220,180,.08), 0 32px 80px rgba(0,0,0,.6);
+  animation: cardIn .55s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes cardIn { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+.ov-icon-wrap {
+  position: relative; display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 88px; height: 88px; margin-bottom: 20px;
+}
+.ov-orbit {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1.5px solid transparent;
+}
+.o1 { border-top-color:var(--teal); border-right-color:var(--teal); animation: spin 3s linear infinite; }
+.o2 { inset:10px; border-bottom-color:var(--amber); border-left-color:var(--amber); animation: spin 2.2s linear infinite reverse; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+.ov-icon {
+  width:68px; height:68px; border-radius:50%;
+  background: linear-gradient(145deg,#0a1a22,#0d2030);
+  border:1px solid rgba(0,220,180,.25);
+  display:flex; align-items:center; justify-content:center;
+  font-size:30px; z-index:1;
+  box-shadow: 0 0 36px var(--teal-g);
+}
+
+.ov-title {
+  font-family:var(--display); font-size:1.35rem; font-weight:800;
+  color:#fff; margin-bottom:6px;
+}
+.ov-badge {
+  display:inline-block; font-family:var(--mono); font-size:.60rem;
+  letter-spacing:.10em; color:var(--amber-d);
+  background:rgba(255,179,71,.08); border:1px solid rgba(255,179,71,.20);
+  border-radius:20px; padding:3px 12px; margin-bottom:12px;
+}
+.ov-hint {
+  font-family:var(--display); font-size:.80rem; color:var(--text2);
+  margin-bottom:20px; line-height:1.5;
+}
+
+.code-row { display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:18px; }
+.room-code {
+  font-family:var(--mono); font-size:2.2rem; font-weight:700;
+  letter-spacing:.30em; color:var(--teal);
+  background:rgba(0,220,180,.06); border:2px solid rgba(0,220,180,.22);
+  border-radius:12px; padding:12px 18px;
+  animation: codeGlow 3s ease-in-out infinite alternate;
+}
+@keyframes codeGlow {
+  from{box-shadow:0 0 10px rgba(0,220,180,.12)}
+  to  {box-shadow:0 0 30px rgba(0,220,180,.28)}
+}
+.copy-btn {
+  width:48px; height:48px; border-radius:12px;
+  border:1px solid rgba(0,220,180,.22); background:var(--panel);
+  font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:background .2s, border-color .2s;
+}
+.copy-btn:hover { background:rgba(0,220,180,.08); border-color:var(--teal); }
+.copy-btn:active { transform:scale(.88); }
+
+.status-row {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  font-family:var(--mono); font-size:.70rem; color:var(--text2); margin-bottom:16px;
+}
+.status-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.status-dot.waiting  { background:var(--amber); animation:blink 1.6s ease-in-out infinite; }
+.status-dot.connected { background:var(--green); box-shadow:0 0 10px var(--green-g); }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+.signal-bars { display:flex; align-items:flex-end; justify-content:center; gap:4px; height:20px; }
+.sb { width:5px; border-radius:2px; background:rgba(0,220,180,.18); animation:barPulse 1.2s ease-in-out infinite; }
+.sb1{height:5px;animation-delay:0s}
+.sb2{height:9px;animation-delay:.15s}
+.sb3{height:14px;animation-delay:.30s}
+.sb4{height:20px;animation-delay:.45s}
+@keyframes barPulse { 0%,100%{background:rgba(0,220,180,.18)} 50%{background:rgba(0,220,180,.65)} }
+
+/* ── VR SCREEN ───────────────────────────────────────────────────────────── */
+.vr-container {
+  width:  var(--cW, 100vw);
+  height: var(--cH, 100vh);
+  display: flex; flex-direction: row;
+  background: #fff;
+  position: absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  overflow: hidden;
+}
+.eye-view {
+  width:  var(--eW);
+  height: var(--cH);
+  position: relative; overflow: hidden;
+  background: #fff;
+}
+.vr-divider { width:2px; background:#fff; height:100%; flex-shrink:0; z-index:10; }
+
+.eye-content {
+  position: absolute; left:50%; top:50%;
+  width:0; height:0;
+  transform: translate(-50%,-50%);
+  /* NO CSS transition — JS smoothAnimate handles interpolation */
+}
+
+.h-line { background:#000; position:absolute; top:50%; transform:translateY(-50%); }
+.h-line-left  { right:0; }
+.h-line-right { left:0; }
+
+.v-line { background:#000; position:absolute; left:50%; transform:translateX(-50%); }
+.v-line-top    { bottom:0; }
+.v-line-bottom { top:0; }
+
+.center-dot {
+  background:#000; border-radius:50%;
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%); z-index:2;
+}
+
+.conn-indicator {
+  position:fixed; top:8px; right:8px;
+  width:9px; height:9px; border-radius:50%;
+  background:var(--red); z-index:20;
+  transition:background .3s;
+}
+.conn-indicator.connected {
+  background:var(--green);
+  box-shadow:0 0 10px var(--green-g);
+  animation:connPulse 2.5s ease-in-out infinite;
+}
+@keyframes connPulse { 0%,100%{box-shadow:0 0 6px var(--green-g)} 50%{box-shadow:0 0 18px var(--green-g)} }
+
+.debug-overlay {
+  position:fixed; bottom:8px; left:8px; z-index:200;
+  background:rgba(5,13,18,.85); color:var(--teal);
+  font-family:var(--mono); font-size:.58rem; line-height:1.6;
+  padding:8px 12px; border-radius:8px;
+  border:1px solid rgba(0,220,180,.20);
+  white-space:pre; pointer-events:none;
+}
+
+@media(orientation:portrait) {
+  .vr-container::after {
+    content:'↻  Rotate to Landscape';
+    position:fixed; inset:0; z-index:50;
+    background:rgba(5,13,18,.95); color:#fff;
+    font-family:var(--display); font-size:1.2rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    letter-spacing:.05em;
+  }
+}

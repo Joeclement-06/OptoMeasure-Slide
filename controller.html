@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>OptoMeasure · Controller</title>
+  <link rel="stylesheet" href="controller.css">
+</head>
+<body data-mode="BO">
+
+  <!-- HEADER -->
+  <header class="hdr">
+    <a href="index.html" class="hdr-back">←</a>
+    <div class="hdr-title">
+      <div class="hdr-dot"></div>
+      <span>OptoMeasure</span>
+      <span class="hdr-sep">/</span>
+      <span class="hdr-role">Controller</span>
+    </div>
+    <div class="hdr-right">
+      <div class="lens-chip">+8.0 D</div>
+      <div class="conn-pill">
+        <span class="conn-dot" id="connDot"></span>
+        <span id="connText">Offline</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── CONNECT SCREEN ──────────────────────────────────────────────── -->
+  <section class="connect-screen" id="connectScreen">
+    <div class="cx-ring cx-r1"></div>
+    <div class="cx-ring cx-r2"></div>
+    <div class="cx-box">
+      <div class="cx-icon-wrap">
+        <div class="cx-orbit"></div>
+        <div class="cx-icon">🔗</div>
+      </div>
+      <h2>Connect to VR Device</h2>
+      <p>Enter the Room Code shown on the patient's phone.</p>
+      <div class="cx-field-wrap">
+        <input type="text" id="inputCode" class="cx-field"
+          maxlength="6" placeholder="XXXXXX"
+          autocomplete="off" spellcheck="false" autocapitalize="characters">
+      </div>
+      <button class="cx-btn tap-btn" id="btnConnect">
+        <span>⚡ Connect</span>
+        <div class="cx-ripple"></div>
+      </button>
+      <p class="cx-hint" id="connectHint"></p>
+    </div>
+  </section>
+
+  <!-- ── MAIN SCREEN ─────────────────────────────────────────────────── -->
+  <main class="main-screen" id="mainScreen">
+
+    <!-- MODE TOGGLE -->
+    <div class="mode-toggle">
+      <button class="mode-btn tap-btn active" id="btnBO">
+        <span class="mode-sym">◀▶</span>
+        <span class="mode-name">Base-Out</span>
+        <span class="mode-desc">Convergence</span>
+        <div class="mode-bar"></div>
+      </button>
+      <button class="mode-btn tap-btn" id="btnBI">
+        <span class="mode-sym">▶◀</span>
+        <span class="mode-name">Base-In</span>
+        <span class="mode-desc">Divergence</span>
+        <div class="mode-bar"></div>
+      </button>
+    </div>
+
+    <!-- PRISM DISPLAY -->
+    <div class="prism-card">
+      <div class="pc-label">PRISM DIOPTERS</div>
+      <div class="pc-value">
+        <span class="pc-num" id="prismDisplay">0.0</span>
+        <span class="pc-delta">Δ</span>
+      </div>
+      <div class="pc-formula" id="pcFormula">y = 80x + 2</div>
+    </div>
+
+    <!-- PRISM SLIDER -->
+    <div class="slider-panel">
+      <div class="sp-head">
+        <span class="sp-label">PRISM CONTROL</span>
+        <span class="sp-range">0 – 35 Δ</span>
+      </div>
+      <div class="sp-track-wrap">
+        <div class="sp-track-fill" id="sliderFill"></div>
+        <input type="range" id="prismSlider"
+          min="0" max="35" step="0.2" value="0"
+          class="sp-slider">
+      </div>
+      <div class="sp-ends"><span>0 Δ</span><span>25 Δ</span></div>
+      <button class="sp-reset tap-btn" id="btnReset">↺ Reset to 0</button>
+    </div>
+
+    <!-- IPD CALIBRATION -->
+    <div class="cal-panel">
+      <div class="cal-head">
+        <div class="cal-head-dot"></div>
+        CALIBRATION
+      </div>
+
+      <!-- IPD Slider -->
+      <div class="cal-row">
+        <span class="cal-label">IPD</span>
+        <div class="cal-track-wrap">
+          <div class="cal-fill" id="ipdFill"></div>
+          <input type="range" id="ipdSlider"
+            min="50" max="90" value="63" step="1"
+            class="cal-slider">
+        </div>
+        <div class="ipd-val-pill"><span id="ipdDisplay">75</span> mm</div>
+      </div>
+
+      <!-- Horizontal fine-tune -->
+      <div class="cal-row cal-offset-row">
+        <span class="cal-label">H-Offset</span>
+        <button class="cal-nudge tap-btn" id="calLeft">◀</button>
+        <div class="cal-val" id="calDisplay">0</div>
+        <button class="cal-nudge tap-btn" id="calRight">▶</button>
+        <button class="cal-small-reset tap-btn" id="calReset">Reset</button>
+      </div>
+      <p class="cal-note">At 0Δ, patient should see one fused + sign. Adjust H-Offset until centred.</p>
+    </div>
+
+    <!-- RECORD BUTTONS -->
+    <div class="rec-panel">
+      <div class="rec-head">
+        <div class="rec-head-dot"></div>
+        RECORD FINDINGS
+      </div>
+      <div class="rec-btns">
+        <button class="rec-btn blur-btn tap-btn"     id="btnBlur">
+          <span class="rec-icon">👁</span>Blur <kbd>U</kbd>
+        </button>
+        <button class="rec-btn break-btn tap-btn"    id="btnBreak">
+          <span class="rec-icon">💥</span>Break <kbd>B</kbd>
+        </button>
+        <button class="rec-btn recovery-btn tap-btn" id="btnRecovery">
+          <span class="rec-icon">✅</span>Recovery <kbd>V</kbd>
+        </button>
+      </div>
+      <div class="results-list" id="resultsList"></div>
+      <button class="clear-btn tap-btn" id="btnClearRes">✕ Clear All</button>
+    </div>
+
+    <!-- KEYBOARD HINTS -->
+    <div class="kbd-bar">
+      <span><kbd>↑</kbd><kbd>+</kbd> +0.5Δ</span>
+      <span><kbd>↓</kbd><kbd>−</kbd> −0.5Δ</span>
+      <span><kbd>R</kbd> Reset</span>
+      <span><kbd>I</kbd> Mode</span>
+      <span><kbd>U</kbd> Blur</span>
+      <span><kbd>B</kbd> Break</span>
+      <span><kbd>V</kbd> Recovery</span>
+    </div>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="shared.js"></script>
+  <script src="controller.js"></script>
+
+  <!-- Formula label updater -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function updateFormula() {
+        const isBI = document.getElementById('btnBI').classList.contains('active');
+        document.getElementById('pcFormula').textContent = isBI ? 'y = 55x + 2' : 'y = 65x + 2';
+      }
+      document.getElementById('btnBO').addEventListener('click', updateFormula);
+      document.getElementById('btnBI').addEventListener('click', updateFormula);
+    });
+  </script>
+</body>
+</html>

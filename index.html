@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>OptoMeasure v4</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="landing">
+
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="icon-wrap">
+        <div class="ring ring-a"></div>
+        <div class="ring ring-b"></div>
+        <div class="hero-icon">👁</div>
+      </div>
+      <h1>Opto<span>Measure</span></h1>
+      <p class="sub">VR Fusional Vergence System · v4 · +8.0 D</p>
+      <p class="desc">Wireless two-device vergence testing via WebRTC. Continuous slider. Smooth animation. Full BO + BI support with correct optical geometry.</p>
+    </section>
+
+    <div class="cards">
+      <a class="card ctrl-card" href="controller.html">
+        <div class="card-corner tl"></div>
+        <div class="card-corner br"></div>
+        <div class="card-icon">🎮</div>
+        <h2>Controller</h2>
+        <p class="card-role">Doctor / Examiner</p>
+        <p class="card-desc">Continuous prism slider 0–25Δ, BO/BI toggle, IPD calibration, blur/break/recovery recording.</p>
+        <div class="chips"><span>Slider</span><span>BO+BI</span><span>Calibration</span><span>Records</span></div>
+        <div class="card-arr">→</div>
+      </a>
+
+      <a class="card vr-card" href="vr.html">
+        <div class="card-corner tl"></div>
+        <div class="card-corner br"></div>
+        <div class="card-icon">🥽</div>
+        <h2>VR View</h2>
+        <p class="card-role">Patient / Cardboard</p>
+        <p class="card-desc">Split-screen binocular target. Smooth 900ms animated transitions. Correct BI outward shift.</p>
+        <div class="chips"><span>Split Screen</span><span>Smooth Anim</span><span>Auto-FS</span></div>
+        <div class="card-arr">→</div>
+      </a>
+    </div>
+
+    <div class="spec-panel">
+      <div class="sp-head">System Specifications</div>
+      <div class="sp-row"><span class="sp-tag">Device</span><span>Vivo Y3 (1938) · 15.93 × 7.47 cm</span></div>
+      <div class="sp-row"><span class="sp-tag">Lens</span><span>+8.0 D · Magnification 4× · Image ~36 cm</span></div>
+      <div class="sp-row"><span class="sp-tag">BO</span><span>y = 65x + 2 · targets move inward (convergence)</span></div>
+      <div class="sp-row"><span class="sp-tag">BI</span><span>y = 55x + 2 · targets move outward (divergence)</span></div>
+      <div class="sp-row"><span class="sp-tag">Slider</span><span>0 – 25 Δ · 0.1Δ increments · 900ms smooth anim</span></div>
+      <div class="sp-row"><span class="sp-tag">IPD</span><span>50 – 90 mm · H-Offset calibration</span></div>
+    </div>
+
+    <div class="qs-panel">
+      <div class="qs-head">⚡ Quick Start</div>
+      <ol>
+        <li><span>Open <strong>VR View</strong> on patient's phone — note the 6-char room code.</span></li>
+        <li><span>Open <strong>Controller</strong> on doctor's phone — enter code → Connect.</span></li>
+        <li><span>Place patient's phone in cardboard. Use H-Offset until fused + appears at 0Δ.</span></li>
+        <li><span>Select mode (BO or BI). Slide prism slowly upward.</span></li>
+        <li><span>Record <strong>Blur</strong>, <strong>Break</strong>, <strong>Recovery</strong> at the appropriate prism.</span></li>
+      </ol>
+    </div>
+
+    <footer class="foot">OptoMeasure v4 · WebRTC · No server · No data uploaded</footer>
+  </div>
+</body>
+</html>
